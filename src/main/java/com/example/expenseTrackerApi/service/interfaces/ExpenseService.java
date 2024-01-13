@@ -1,6 +1,6 @@
 package com.example.expenseTrackerApi.service.interfaces;
 
-import com.example.expenseTrackerApi.entity.Expense;
+import com.example.expenseTrackerApi.domain.entity.dto.ExpenseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,20 +10,20 @@ import java.util.List;
 
 public interface ExpenseService {
 
-    Page<Expense> getAllExpenses(Pageable page);
+    Page<ExpenseDto> getAllExpenses(Pageable page);
 
-    Expense getExpenseById(Long id);
+    ExpenseDto getExpenseById(Long id);
 
     void deleteExpenseById(Long id);
 
-    Expense saveExpenseDetails(Expense expense);
+    ExpenseDto createExpense(ExpenseDto expenseDto);
 
-    Expense updateExpenseDetails(Long id, Expense expense);
+    ExpenseDto updateExpense(Long id, ExpenseDto expenseDto);
 
-    List<Expense> readByCategory(String category, Pageable page);
+    List<ExpenseDto> readByCategory(String category, Pageable page);
 
-    List<Expense> readByName(String keyword, Pageable page);
+    List<ExpenseDto> readByName(String keyword, Pageable page);
 
-    List<Expense> readByDate(LocalDate startDate, LocalDate endDate, Pageable page);
+    List<ExpenseDto> readByDate(LocalDate startDate, LocalDate endDate, Pageable page);
 
 }

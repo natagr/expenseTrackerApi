@@ -1,6 +1,6 @@
 package com.example.expenseTrackerApi.repository;
 
-import com.example.expenseTrackerApi.entity.User;
+import com.example.expenseTrackerApi.domain.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

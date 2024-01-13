@@ -1,6 +1,6 @@
 package com.example.expenseTrackerApi.repository;
 
-import com.example.expenseTrackerApi.entity.Expense;
+import com.example.expenseTrackerApi.domain.entity.Expense;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

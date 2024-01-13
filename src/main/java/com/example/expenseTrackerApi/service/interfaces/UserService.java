@@ -1,19 +1,22 @@
 package com.example.expenseTrackerApi.service.interfaces;
 
 
-import com.example.expenseTrackerApi.entity.User;
-import com.example.expenseTrackerApi.entity.UserModel;
+import com.example.expenseTrackerApi.domain.entity.PasswordChangeRequest;
+import com.example.expenseTrackerApi.domain.entity.User;
+import com.example.expenseTrackerApi.domain.entity.dto.UserDto;
 
 public interface UserService {
 
-    User createUser(UserModel userModel);
+//    User createUser(UserModel userModel);
 
-    User readUser();
+    UserDto getUserById();
 
-    User updateUser(UserModel userModel);
+    UserDto updateUser(UserDto userDto);
 
     void deleteUser();
 
     User getLoggedInUser();
+
+    void updatePasswordForUser(PasswordChangeRequest passwordChangeRequest);
 
 }
