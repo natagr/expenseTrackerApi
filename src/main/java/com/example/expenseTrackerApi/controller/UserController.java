@@ -1,12 +1,10 @@
 package com.example.expenseTrackerApi.controller;
 
-import com.example.expenseTrackerApi.entity.User;
-import com.example.expenseTrackerApi.entity.UserModel;
+import com.example.expenseTrackerApi.domain.entity.dto.UserDto;
 import com.example.expenseTrackerApi.service.interfaces.UserService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,25 +13,23 @@ public class UserController {
 
     private final UserService userService;
 
-
-
     @GetMapping("/profile")
-    public ResponseEntity<User> readUser(){
-        return new ResponseEntity<User>(userService.readUser(), HttpStatus.OK);
-
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto getUserById(){
+        return userService.getUserById();
     }
 
-    @PutMapping("/profile")
-    public ResponseEntity<User> updateUser(@RequestBody UserModel user){
-        return new ResponseEntity<User>(userService.updateUser(user), HttpStatus.OK);
+    @PatchMapping("/profile")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto updateUser(@RequestBody UserDto userDto){
+        return userService.updateUser(userDto);
 
     }
 
     @DeleteMapping("/deactivate")
-    public ResponseEntity<HttpStatus> deleteUser(){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(){
         userService.deleteUser();
-        return new ResponseEntity<HttpStatus>( HttpStatus.NO_CONTENT);
-
     }
 
 }

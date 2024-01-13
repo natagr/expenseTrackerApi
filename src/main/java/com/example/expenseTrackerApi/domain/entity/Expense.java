@@ -1,18 +1,17 @@
-package com.example.expenseTrackerApi.entity;
+package com.example.expenseTrackerApi.domain.entity;
 
+import com.example.expenseTrackerApi.domain.base.AbstractVersionalIdentifiable;
+import com.example.expenseTrackerApi.domain.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @ToString
@@ -23,11 +22,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tbl_expenses")
 
-public class Expense {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Expense extends AbstractVersionalIdentifiable {
 
     @Column(name="expense_name")
     @NotBlank(message="expense name must not be null")
@@ -35,7 +30,6 @@ public class Expense {
     private String name;
 
     private String description;
-
 
     @Column(name="expense_amount")
     @NotNull(message = "expense amount must not be null")
@@ -47,19 +41,10 @@ public class Expense {
     @NotNull(message = "expense date must not be null")
     private LocalDate date;
 
-    @Column(name="created_at", nullable = false, updatable = false)
-    @CreationTimestamp
-    private Timestamp createdAt;
-
-    @Column(name="updated_at")
-    @UpdateTimestamp
-    private Timestamp updatedAt;
-
     @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JoinColumn(name="user_id", nullable=false)
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
     private User user;
-
 
 }
