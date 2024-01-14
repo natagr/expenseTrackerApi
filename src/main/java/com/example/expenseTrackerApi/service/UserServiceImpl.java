@@ -59,9 +59,7 @@ public class UserServiceImpl implements UserService {
     public User getLoggedInUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        User user = (User)authentication.getPrincipal();
-
-        return userRepository.findById(user.getId()).orElseThrow(() -> new UsernameNotFoundException("User not found for the id"+user.getId()));
+        return (User)authentication.getPrincipal();
     }
 
     @Transactional

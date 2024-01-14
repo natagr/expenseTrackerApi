@@ -1,6 +1,7 @@
 package com.example.expenseTrackerApi.service;
 
 import com.example.expenseTrackerApi.domain.entity.Expense;
+import com.example.expenseTrackerApi.domain.entity.User;
 import com.example.expenseTrackerApi.domain.entity.dto.ExpenseDto;
 
 import com.example.expenseTrackerApi.domain.mapper.ExpenseMapper;
@@ -11,6 +12,7 @@ import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,15 +54,17 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Transactional
     @Override
-    public ExpenseDto createExpense(ExpenseDto expenseDto) {
+    public ExpenseDto createExpense(ExpenseDto expenseDto, Authentication authentication) {
         Expense expense = new Expense();
+
         expense.setName(expenseDto.getName());
         expense.setDescription(expenseDto.getDescription());
         expense.setCategory(expenseDto.getCategory());
         expense.setAmount(expenseDto.getAmount());
         expense.setDate(expenseDto.getDate());
         expense.setUser(userService.getLoggedInUser());
-        return expenseDto;
+        expenseRepo.save(expense);
+        return expenseDto ;
     }
 
     @Transactional

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -22,8 +23,8 @@ public class ExpenseController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/expenses")
-    public ExpenseDto createExpense(@Valid @RequestBody ExpenseDto expenseDto) {
-        return expenseService.createExpense(expenseDto);
+    public ExpenseDto createExpense(@Valid @RequestBody ExpenseDto expenseDto, Authentication authentication) {
+        return expenseService.createExpense(expenseDto,authentication);
     }
 
     @GetMapping("/expenses")
