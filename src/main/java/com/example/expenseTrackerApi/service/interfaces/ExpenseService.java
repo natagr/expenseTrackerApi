@@ -3,6 +3,7 @@ package com.example.expenseTrackerApi.service.interfaces;
 import com.example.expenseTrackerApi.domain.entity.dto.ExpenseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 
 import java.time.LocalDate;
 
@@ -16,7 +17,7 @@ public interface ExpenseService {
 
     void deleteExpenseById(Long id);
 
-    ExpenseDto createExpense(ExpenseDto expenseDto);
+    ExpenseDto createExpense(ExpenseDto expenseDto, Authentication authentication);
 
     ExpenseDto updateExpense(Long id, ExpenseDto expenseDto);
 
